@@ -6,12 +6,19 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import { useShareIntent } from "expo-share-intent";
+
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const { hasShareIntent, shareIntent, resetShareIntent, error } =
+  useShareIntent({debug: true});
+
+  console.log('hasShareIntent', hasShareIntent);
+
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
